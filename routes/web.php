@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,11 +39,21 @@ Route::middleware('auth')->group(function () {
 
 Route::controller(App\Http\Controllers\PengaduanController::class)->group(function(){
     Route::post("/tambahpengaduan","tambah")->name("laporan.buat");
-    Route::post("/getsinglepengaduan","getsingle")->name("laporan.getsingle");
+    Route::post("/getsinglepengaduan","getsingle")->name("laporan.getsingles");
+    Route::post("/getpetugaslist","getpetugaslist")->name("laporan.getpetugaslist");
+    Route::post("/getpetugaslist","getpetugaslist")->name("laporan.getpetugaslist");
+    Route::post("/assign-petugas","assignpetugas")->name("laporan.assignpetugas");
+    
 });
 
+Route::post("/send-tanggapan",[App\Http\Controllers\PengaduanController::class, "sendtanggapan"])->name("laporan.send-tanggapan");
+
+Route::get('/tugas-saya', [App\Http\Controllers\PenugasanController::class, "tugassaya"]);
 
 
+Route::get('/flogout', function(){
+    Auth::guard("web")->logout();
+});
 
 require __DIR__.'/auth.php';
 

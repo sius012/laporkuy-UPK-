@@ -17,7 +17,6 @@ return new class extends Migration
         Schema::create('penugasan', function (Blueprint $table) {
             $table->id('id_penugasan');
             $table->unsignedBigInteger('id_pengaduan');
-            $table->unsignedBigInteger('id_status');
             $table->unsignedBigInteger('id_admin');
             $table->string('keterangan_admin');
             $table->string('keterangan_petugas')->nullable();
@@ -34,6 +33,14 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        
+            if (Schema::hasColumn('penugasan', 'id_status'))
+            {
+                Schema::table('penugasan', function (Blueprint $table)
+                {
+                    $table->dropColumn('id_status');
+                });
+            }
+        
     }
 };

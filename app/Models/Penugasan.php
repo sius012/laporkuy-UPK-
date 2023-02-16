@@ -17,4 +17,9 @@ class Penugasan extends Model
     public function petugas_lapangan(){
         return $this->hasMany(PetugasLapangan::class, "id_penugasan", "id_penugasan");
     }
+
+    public function tanggapan(){
+        return $this->hasMany(Tanggapan::class, "id_penugasan", "id_penugasan");
+    }
+    
 }

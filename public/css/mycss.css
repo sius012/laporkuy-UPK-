@@ -35,4 +35,28 @@
     .actived-lk{
         background-color: rgba(249, 242, 255, 0.2);
     }
+.bg-menunggu{
 
+    background-color: rgb(116, 116, 116) !important;
+    color: white !important;
+}
+
+.bg-kepetugas{
+    background-color: rgb(202, 199, 22) !important;
+    color: white !important;
+}
+
+.bg-diproses{
+    background-color: rgb(179, 255, 0) !important;
+    color: white !important;
+}
+
+.bg-ditunda{
+    background-color: rgb(238, 93, 93) !important;
+    color: white !important;
+}
+
+.bg-selesai{
+    background-color: rgb(113, 123, 255) !important;
+    color: white !important;
+}

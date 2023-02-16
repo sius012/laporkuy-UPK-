@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('judul_pengaduan');
             $table->unsignedBigInteger('id_jp');
             $table->unsignedBigInteger('id_pelapor');
-            $table->enum('status',["Menunggu","Diproses","Ke Petugas","Di Tunda", "Selesai"]);
+            $table->enum('status',["Menunggu","Diproses","Ke Petugas","Ditunda", "Selesai"]);
             $table->string('keterangan', 255);
             $table->string('lokasi');
             $table->dateTime('tanggal', $precision = 0);

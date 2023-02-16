@@ -20,6 +20,11 @@ class LaporkuyHelper {
             "nama_menu" => "Kontrol Laporan",
             "icon" => "fa fa-file-text",
             "url" => url("/admin/kontrollaporan")
+        ],
+        [
+            "nama_menu" => "Tugas Saya",
+            "icon" => "fa fa-file-text",
+            "url" => url("/tugas-saya")
         ]
     ];
 

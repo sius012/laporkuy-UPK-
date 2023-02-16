@@ -27,7 +27,10 @@
                     <td>{{$p->keterangan}}</td>
                     <td>{{$p->pelapor->name}}</td>
                     <td>{{$p->status}}</td>
-                    <td><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-laporan"><i class="fa fa-file"></i></button></td>
+                    <td>
+                        <button value="{{$p->id_pengaduan}}" class="btn btn-primary btn-info-laporan" data-bs-toggle="modal" data-bs-target="#modal-laporan"><i class="fa fa-file"></i></button>
+                        <button value="{{$p->id_pengaduan}}" data-bs-toggle="modal" data-bs-target="#modal-penugasan" class="btn btn-success btn-assigment" ><i class="fa fa-users"></i></button>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
@@ -87,7 +90,7 @@
         </div>
     </div>
 </div>
-
+@include("components.laporkuy.modalpenugasan")
 @include("components.laporkuy.modallaporaninfo")
 
 
@@ -116,6 +119,188 @@ $(function() {
         "autoWidth": false,
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     }).buttons().container().appendTo('#example_wrapper .col-md-6:eq(0)');
+
+
+    $(".btn-assigment").click(function(){
+        $("#id_pengaduan").val($(this).val());
+    });
+
+
+    $(".btn-info-laporan").click(function(){
+        $.ajax({
+            headers: {
+            "X-CSRF-TOKEN" : $("meta[name=csrf-token]").attr('content')
+            },
+            url: "{{url('getsinglepengaduan')}}",
+            dataType: "json",
+            data: {
+                id_pengaduan: $(this).val()
+            },
+            type: "post",
+            success: function(data){
+               
+                $(".status-drop").text(data["status"]);
+                $(".status-drop").attr("class","btn  dropdown-toggle status-drop "+renderSpan(data["status"]));
+                console.log(data);
+                //rendertab
+                if(data["penugasan"]==null){
+                        //alert("tes");
+                        $("#respon-petugas").children(".card").hide();
+
+                        
+                 }else{
+                    $("input[name=param]").val(data["penugasan"]["id_penugasan"]);
+                        $("#respon-petugas").children(".card").show();
+
+                        $(".keterangan-admin-text").text(data["penugasan"]["keterangan_admin"]);
+                        
+                        //isi tanggapan
+                        if(data["penugasan"]["tanggapan"].length > 0){
+                            var message = data["penugasan"]["tanggapan"].map(function(e){
+                                return `<div class="row ${e["id_sender"] == "{{auth()->user()->id}}" ? "justify-content-end" : "" }">
+                                                                <div class="col-4">
+                                                                    <div class="card m-3 p-3 ${e["id_sender"] == "{{auth()->user()->id}}" ? "bg-primary" : "" }">
+                                                                          <span class="m-0"><b>${e["sender"]["name"]}</b></p>
+                                                                        <span><b>${e["tanggapan"]}</b></p>
+                                                                        <span>${e["tanggal"]}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>`
+                            });
+                         
+                            $(".card-tanggapan").html(message);
+
+
+                        }else{
+        
+                            $(".card-tanggapan").html("<h4 class='m-auto p-4'>Belum ada tanggapan</h4>");
+                        }
+
+                 }
+                 $(".modal-jenis-laporan").text(data["jenis_pengaduan"]["jenis"]);
+                 $(".modal-judul-laporan").text(data["judul_pengaduan"]);
+                 $(".modal-tanggal-laporan").text(data["tanggal"]);
+                $(".keterangan-field").text(data["keterangan"]);
+
+
+                let images = data["lampiran"].map(function(e,i){
+                    return ` <div class="carousel-item ${i==0 ? "active" : ""}">
+                    <img class="d-block " style="height: 400px; width:300px" src="${e["isi_lampiran"]}" alt="First slide">
+                    </div>`;
+                    
+                });
+              // alert(images);
+        
+                //load image
+                $(".img-prev-cont").html(`
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    ${images}
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+                `)
+            },
+            error: function(err){
+                alert(err.responseText);
+            }
+        })
+    })
+
+
+        $("#petugas-field").keyup(function(){
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN" : $("meta[name=csrf-token]").attr("content")
+                },
+                data: {
+                    name: $(this).val()
+                },
+                url: "{{url('/getpetugaslist')}}",
+                dataType: "json",
+                type: "post",
+                success: function(data){
+                    $("#petugas-list").show();
+                    
+                    console.log(data);
+                    
+                    var li = data.map(function(e){
+                        return `<li class="list-group-item">${e["name"]} <button type="button" class="btn btn-sm btn-primary add-petugas" value="${e["id"]}" name_account="${e["name"]}">+</button></li>`;
+                    })
+                    $("#petugas-list").html(li);
+                },error: function(err){
+                    alert(err.responseText);
+                }
+            })
+        });
+
+        $(document).delegate(".add-petugas", "click", function(){
+            let id_user = $(this).val();
+            let sudahada = false;
+            $(".petugas-id-cont").each(function(){
+                if(id_user == $(this).val()){
+                    sudahada = true;
+                }
+            });
+            if(!sudahada){
+                $(".petugas-container").append(
+                ` <tr>
+                            <td><input type='hidden' name="petugas[]" class="petugas-id-cont" value="${$(this).val()}">${$(this).attr("name_account")}</td>
+                            <td>
+                                <select class="form-control" class="jabatan-select" name="jabatan[]">
+                                    <option value='Anggota'>Anggota</option>
+                                    <option value='Ketua'>Ketua</option>
+                                </select>
+                            </td>
+                            <td><button class="btn btn-danger btn-hapus-petugas"><i class="fa fa-trash"></i></button></td>
+                        </tr>`
+            )
+            }
+           
+        });
+
+        $(document).delegate(".btn-hapus-petugas", "click", function(){
+            $(this).closest("tr").remove();
+        });
+
+
+        $("#message-sender").click(function(){
+            if($("#isi-pesan").val().length != ""){
+                $.ajax({
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name=csrf-token]").attr("content")
+                    },
+                    url: "{{url('send-tanggapan')}}",
+                    dataType: "json",
+                    data: {
+                        "id_penugasan": $("input[name=param]").val(),
+                        "pesan": $("#isi-pesan").val()
+                    },
+                    type: "post",
+                    success: function(data){
+                        window.location = "";
+                    },error: function(err){
+                        alert(err.responseText);
+                    }
+                })
+            }
+        });
+
+
+        //update status;
+        $('.dropdown').on('hidden.bs.dropdown', function () {
+            
+        });
 });
 </script>
 @endpush

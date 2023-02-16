@@ -17,14 +17,45 @@ class UserSeeder extends Seeder
     public function run()
     {
         $user = User::create([
-            'name' => 'Admin Dionisius', 
-            'email' => 'deon@gmail.com',
-            'password' => bcrypt('12345678')
+            'name' => 'Dionisius Setya Hermawan', 
+            'email' => 'dionhermawan@gmail.com',
+            'password' => bcrypt('12345678'),
+        ]);
+
+        $role = Role::create(['name' => 'Admin']);
+
+        $user->assignRole([$role]);
+
+        $user = User::create([
+            'name' => 'Bambang Eko', 
+            'email' => 'bambangeko@gmail.com',
+            'password' => bcrypt('12345678'),
         ]);
       
-       $role = Role::create(['name' => 'Admin']);
+       $role = Role::create(['name' => 'Petugas']);
        
        
         $user->assignRole([$role]);
+
+
+        $user = User::create([
+            'name' => 'Egy Supratman', 
+            'email' => 'egysupratman@gmail.com',
+            'password' => bcrypt('12345678'),
+        ]);
+      
+
+       
+       
+        $user->assignRole("Petugas");
+
+        $user = User::create([
+            'name' => 'Mamang garox', 
+            'email' => 'mamanggarox@gmail.com',
+            'password' => bcrypt('12345678'),
+        ]);
+
+       
+        $user->assignRole("Petugas");
     }
 }

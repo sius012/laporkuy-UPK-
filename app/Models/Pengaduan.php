@@ -14,7 +14,7 @@ class Pengaduan extends Model
         "judul_pengaduan",
         "id_jp",
         "id_pelapor",
-        "id_status",
+        "status",
         "keterangan",
         "tanggal",
         "lokasi"
@@ -31,6 +31,14 @@ class Pengaduan extends Model
 
     public function lampiran(){
         return $this->hasMany(Lampiran::class,"id_pengaduan","id_pengaduan");
+    }
+
+    public function penugasan(){
+        return $this->hasOne(Penugasan::class,"id_pengaduan","id_pengaduan");
+    }
+
+    public function jenis_pengaduan(){
+        return $this->hasOne(JenisPengaduan::class,"id_jp","id_jp");
     }
 
 }

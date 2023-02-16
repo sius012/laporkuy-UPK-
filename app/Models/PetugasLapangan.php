@@ -13,4 +13,6 @@ class PetugasLapangan extends Model
     protected $fillable = [
         "id_pl","id_petugas","id_penugasan","jabatan","status"
     ];
+
+  
 }

@@ -5,11 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\JenisPengaduan;
 use App\Models\Pengaduan;
+use App\Models\Penugasan;
+use App\Models\PetugasLapangan;
 use App\Models\Lampiran;
 use App\Models\Status;
+use App\Models\Tanggapan;
 use Auth;
+use App\Models\User;
+use Carbon\Carbon;
 
 use Illuminate\Support\Facades\DB;
+
 class PengaduanController extends Controller
 {
     
@@ -66,6 +72,8 @@ class PengaduanController extends Controller
 
         DB::commit();
 
+        return redirect()->back();
+
     }
 
 
@@ -77,8 +85,58 @@ class PengaduanController extends Controller
     }
 
     public static function getSingle(Request $req){
-        $pengaduan = Pengaduan::with("jenis")->with("pelapor")->find($req->id_pengaduan);
+        $pengaduan = Pengaduan::with("jenis")->with("lampiran")->with("pelapor", "penugasan.tanggapan.sender","jenis_pengaduan")->find($req->id_pengaduan);
         //dd($pengaduan);
         return $pengaduan;
+    }
+
+    public function getPetugaslist(Request $req){
+        $petugas = User::role("Petugas")->where("name","LIKE","%".$req->name."%")->get();
+        return $petugas;
+    }
+
+    public function assignpetugas(Request $req){
+      //  dd($req);
+        DB::beginTransaction();
+           
+
+            try {
+                $penugasan = Penugasan::create([
+                    "id_pengaduan"=>$req->id_pengaduan,
+                    "id_admin"=>Auth::user()->id,
+                    "keterangan_admin"=>$req->keterangan_admin
+                ]);
+    
+                //menambahkan petugas lapangan
+                foreach($req->petugas as $i => $p){
+                    $pl = PetugasLapangan::create([
+                        "id_petugas"=>$p,
+                        "id_penugasan"=>$penugasan->id_penugasan,
+                        "jabatan"=>$req->jabatan[$i],
+                        "status"=>"aktif"
+                    ]);
+                }
+
+                
+            } catch (\Throwable $th) {
+                DB::rollBack();
+            }
+        DB::commit();
+        Pengaduan::find(2)->update(["status"=>"Ke Petugas"]);
+    }
+
+    public function sendtanggapan(Request $req){
+        $pesan = $req->pesan;
+        $id_penugasan = $req->id_penugasan;
+        $id_sender = Auth::user()->id;
+
+        $tanggapan = Tanggapan::create([
+            "tanggapan"=>$pesan,
+            "id_penugasan"=>$id_penugasan,
+            "id_sender"=>$id_sender,
+            "tanggal"=>Carbon::now()->toDateTimeString()
+        ]);
+
+        return $tanggapan;
     }
 }
