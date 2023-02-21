@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +45,13 @@ Route::controller(App\Http\Controllers\PengaduanController::class)->group(functi
     Route::post("/assign-petugas","assignpetugas")->name("laporan.assignpetugas");
     
 });
+
+
+
+Route::post("ubahstatuslaporan", [\App\Http\Controllers\PengaduanController::class,"ubahstatus"]);
+
+
+
 
 Route::post("/send-tanggapan",[App\Http\Controllers\PengaduanController::class, "sendtanggapan"])->name("laporan.send-tanggapan");
 

@@ -26,7 +26,23 @@
                     <td>{{$p->judul_pengaduan}}</td>
                     <td>{{$p->keterangan}}</td>
                     <td>{{$p->pelapor->name}}</td>
-                    <td>{{$p->status}}</td>
+                    <td>
+                    <div class="dropdown show ">
+                                            <a class="btn  dropdown-toggle status-drop {{Laporkuy::renderSpan($p->status)}}" href="#" role="button"
+                                                id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                                    {{$p->status}}
+                                            </a>
+
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <a class="dropdown-item" href="#" value="Menunggu:{{$p->id_pengaduan}}">Menunggu</a>
+                                                <a class="dropdown-item" href="#" value="Ke Petugas:{{$p->id_pengaduan}}">Ke Petugas</a>
+                                                <a class="dropdown-item" href="#" value="Diproses:{{$p->id_pengaduan}}">Diproses</a>
+                                                <a class="dropdown-item" href="#" value="Ditunda:{{$p->id_pengaduan}}">Ditunda</a>
+                                                <a class="dropdown-item" href="#" value="Selesai:{{$p->id_pengaduan}}">Selesai</a>
+                                            </div>
+                                        </div>
+                    </td>
                     <td>
                         <button value="{{$p->id_pengaduan}}" class="btn btn-primary btn-info-laporan" data-bs-toggle="modal" data-bs-target="#modal-laporan"><i class="fa fa-file"></i></button>
                         <button value="{{$p->id_pengaduan}}" data-bs-toggle="modal" data-bs-target="#modal-penugasan" class="btn btn-success btn-assigment" ><i class="fa fa-users"></i></button>
@@ -157,18 +173,22 @@ $(function() {
                         //isi tanggapan
                         if(data["penugasan"]["tanggapan"].length > 0){
                             var message = data["penugasan"]["tanggapan"].map(function(e){
-                                return `<div class="row ${e["id_sender"] == "{{auth()->user()->id}}" ? "justify-content-end" : "" }">
-                                                                <div class="col-4">
-                                                                    <div class="card m-3 p-3 ${e["id_sender"] == "{{auth()->user()->id}}" ? "bg-primary" : "" }">
-                                                                          <span class="m-0"><b>${e["sender"]["name"]}</b></p>
-                                                                        <span><b>${e["tanggapan"]}</b></p>
-                                                                        <span>${e["tanggal"]}</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>`
+                                return ` <div class="direct-chat-msg ${e['id_sender'] == "{{auth()->user()->id}}" ? 'left' : 'right'}" >
+                                    <div class="direct-chat-infos clearfix">
+                                    <span class="direct-chat-name ${e['id_sender'] == "{{auth()->user()->id}}" ? 'float-left' : 'float-right'}">${e["sender"]["name"]+" "} </span>
+                                    <span class="direct-chat-timestamp ${e["id_sender"] == "{{auth()->user()->id}}" ? 'float-left' : 'float-right'}">${e["tanggal"]}</span>
+                                    </div>
+                                    <!-- /.direct-chat-infos -->
+                                    <img class="direct-chat-img" src="https://www.cobdoglaps.sa.edu.au/wp-content/uploads/2017/11/placeholder-profile-sq.jpg" alt="message user image">
+                                    <!-- /.direct-chat-img -->
+                                    <div class="direct-chat-text">
+                                    ${e["tanggapan"]} 
+                                    </div>
+                                    <!-- /.direct-chat-text -->
+                                </div>`
                             });
                          
-                            $(".card-tanggapan").html(message);
+                            $(".direct-chat-messages").html(message);
 
 
                         }else{
@@ -298,9 +318,30 @@ $(function() {
 
 
         //update status;
-        $('.dropdown').on('hidden.bs.dropdown', function () {
-            
+        $(document).delegate(".dropdown-item", "click", function(){
+            changeStatus($(this).attr("value"));
         });
 });
+
+
+function changeStatus(val){
+    Swal.fire(val);
+    $.ajax({
+        headers: {
+            "X-CSRF-TOKEN": $("meta[name=csrf-token]").attr("content")
+        },
+        url: "{{url('/ubahstatuslaporan')}}",
+        dataType: "json",
+        data: {
+            val: val,
+        },
+        type: "post",
+        success: function(){
+           alert("ytes");
+        },error: function(err){
+            alert(err.responseText);
+        } 
+    });
+}
 </script>
 @endpush

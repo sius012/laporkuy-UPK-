@@ -28,13 +28,22 @@ class LaporkuyHelper {
         ]
     ];
 
-        foreach($nav as $mn){
-            echo '
-            <li class="nav-item">
-                <a class="nav-link '.($mn["url"] == url()->current() ? "actived-lk" : "").'" aria-current="page" href="'.$mn['url'].'"><i class="'.$mn['icon'].' m-3 d-inline"></i>'.$mn["nama_menu"].'</a>
-            </li>
-            ';
-        }
+        return $nav;
+    }
+
+
+    public static function renderSpan($status){
+            if($status=="Menunggu"){
+                return "bg-menunggu";
+            }else if($status=="Ke Petugas"){
+                return "bg-kepetugas";
+            }else if($status=="Diproses"){
+                return "bg-diproses";
+            }else if($status=="Ditunda"){
+                return "bg-ditunda";
+            }else if($status=="Selesai"){
+                return "bg-selesai";
+            }
     }
 }
 

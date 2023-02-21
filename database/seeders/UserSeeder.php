@@ -55,6 +55,10 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678'),
         ]);
 
+        #this is a command 
+
+        return
+
        
         $user->assignRole("Petugas");
     }

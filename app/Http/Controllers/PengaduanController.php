@@ -12,6 +12,7 @@ use App\Models\Status;
 use App\Models\Tanggapan;
 use Auth;
 use App\Models\User;
+use App\Models\ChangeLog;
 use Carbon\Carbon;
 
 use Illuminate\Support\Facades\DB;
@@ -116,13 +117,15 @@ class PengaduanController extends Controller
                         "status"=>"aktif"
                     ]);
                 }
+                
+                Pengaduan::find($req->id_pengaduan)->update(["status"=>"Ke Petugas"]);
 
                 
             } catch (\Throwable $th) {
                 DB::rollBack();
             }
         DB::commit();
-        Pengaduan::find(2)->update(["status"=>"Ke Petugas"]);
+        
     }
 
     public function sendtanggapan(Request $req){
@@ -138,5 +141,20 @@ class PengaduanController extends Controller
         ]);
 
         return $tanggapan;
+    }
+
+
+    public function ubahStatus(Request $req){
+        $statusarr = explode(",",$req->val);
+        $status = $statusarr[0];
+        $id_pengaduan = $statusarr[1];
+
+        $cl = ChangeLog::create([
+            "keterangan_log"=>"mengubah status menjadi ".$status,
+            "id_pengaduan"=>$id_pengaduan,
+            "id_changer"=>Auth::user()->id,
+        ]);
+
+        return json_encode($cl);
     }
 }
