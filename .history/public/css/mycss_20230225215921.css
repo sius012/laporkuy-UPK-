@@ -1,0 +1,111 @@
+:root {
+    --primary: #110933;
+  }
+ 
+ 
+ 
+ *{
+   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ }
+    .my-nav {
+        background-color: var(--primary);
+    }
+
+    .my-nav .nav-item a{
+        color: white;
+        padding: 10px 10pt;
+        font-size: 10pt;
+        font-weight: bold;
+        border-radius: 10px;
+    }
+
+
+    .my-nav .nav-item a:hover{
+        background-color: white;
+        color: var(--primary);
+        transition: .5s;
+    }
+
+
+    .navbar-brand{
+        color:white !important;
+        font-size: 18pt !important;
+    }
+    
+    .actived-lk{
+        background-color: rgba(249, 242, 255, 0.2);
+    }
+.bg-menunggu{
+
+    background-color: rgb(116, 116, 116) !important;
+    color: white !important;
+}
+
+.bg-kepetugas{
+    background-color: rgb(202, 199, 22) !important;
+    color: white !important;
+}
+
+.bg-diproses{
+    background-color: rgb(179, 255, 0) !important;
+    color: white !important;
+}
+
+.bg-ditunda{
+    background-color: rgb(238, 93, 93) !important;
+    color: white !important;
+}
+
+.bg-selesai{
+    background-color: rgb(113, 123, 255) !important;
+    color: white !important;
+}
+
+.sidebar-light-primary{
+    background: rgb(2,0,36);
+    background: linear-gradient(74deg, rgba(2,0,36,1) 0%, rgba(75,9,121,1) 0%, rgba(123,57,220,1) 100%);
+
+    color: white !important;
+}
+
+.sidebar-light-primary .nav-link{
+
+
+    color: white !important;
+}
+
+
+.bg-primary-lk{
+    background: linear-gradient(74deg, rgba(2,0,36,1) 0%, rgba(75,9,121,1) 0%, rgba(123,57,220,1) 100%) !important;
+}
+
+aside .nav-link{
+    font-size: 15pt !important;
+}
+
+.btn-primary-lk{
+    background: linear-gradient(74deg, rgba(2,0,36,1) 0%, rgba(75,9,121,1) 0%, rgba(123,57,220,1) 100%);
+    color: white;
+}
+
+.bg-primary-lk{
+    color: white;
+}
+
+.navbar-lk-trans{
+    
+    background-color: rgba(0, 0, 0, 0.219)
+}
+
+a{
+
+  background-image: linear-gradient(60deg, #6111e2, #7c3aff);
+  font-weight: bold;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+}
+
+.navbar .nav-link{
+    
+}
