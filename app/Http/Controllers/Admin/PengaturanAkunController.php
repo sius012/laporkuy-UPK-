@@ -13,6 +13,7 @@ class PengaturanAkunController extends Controller
     public function index(Request $req){
         $user = User::all();
         $role = Role::all();
+
         return view("admin.pengaturanpengguna.index", ["user"=>$user,"role"=>$role]);
     }
 
@@ -69,5 +70,10 @@ class PengaturanAkunController extends Controller
 
         return redirect()->back();
 
+    }
+
+    public function hapusPengguna(Request $req){
+        User::find($req->id)->delete();
+        return json_encode($req->input());
     }
 }

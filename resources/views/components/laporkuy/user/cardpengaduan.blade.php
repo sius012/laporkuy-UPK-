@@ -276,5 +276,10 @@
     </div>
     <div class="card-footer">
         <button class="btn btn-primary-lk  btn-lampiran" value="{{$pn->id_pengaduan}}" state="before" data-toggle="modal" data-target="#modal-lampiran"><i class="fa fa-image"></i></button>
+        @if($pn->penugasan != null)
+            @if($pn->penugasan->keterangan_petugas != null)
+                <button class="btn btn-primary"><i class="fa fa-image"></i></button>
+            @endif
+        @endif
     </div>
 </div>

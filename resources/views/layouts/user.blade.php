@@ -29,10 +29,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="{{asset('css/mycss.css')}}" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-   
+    @stack("css")
     <title>@yield("title")</title>
 </head>
 <body>
+
     <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light shadow first-letter: @if(isset($transparent))@if($transparent == true )position-absolute navbar-lk-trans m-1 @else   @endif  @else position-absolute  navbar-lk-trans m-1 @endif  w-100">
     <!-- Container wrapper -->

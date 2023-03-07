@@ -13,11 +13,12 @@ use Illuminate\Support\Carbon;
 class MasyarakatController extends Controller
 {
     public function index(Request $req){
-        $jp = JenisPengaduan::all();
+        $jp = JenisPengaduan::where("status", "Aktif")->get();
         return view("welcome", ["jenispengaduan"=>$jp]);
     }
 
     public function buatpengaduan(Request $req){
+      //  dd($req);
        $pengaduan = new PengaduanController;
        $pengaduan->tambah($req);
 

@@ -4,7 +4,7 @@
 <div class="container card p-3 my-5">
     <form action="{{route('user.perbaruiakun')}}" method="POST" enctype="multipart/form-data">
     @csrf
-    <div class="row">
+    <div class="row">''
         <div class="col-sm-4 d-flex">
             <img class="rounded-circle m-auto shadow" src="{{Auth::user()->pp()}}" alt="" style="width: 220px; height: 220px" >
             <button type="button" class="btn btn-primary-lk position-absolute btn-image m-auto" style="top: 70%; left: 20%"><i class="fa fa-image"></i></button>

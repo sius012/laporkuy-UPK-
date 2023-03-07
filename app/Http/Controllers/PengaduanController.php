@@ -22,10 +22,10 @@ class PengaduanController extends Controller
     
 
     public function tambah(Request $req){
-        $this->validate($req, [
-            'lampiran' => "required|array|min:3",
-            'lampiran.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        // $this->validate($req, [
+        //     'lampiran' => "required|array|min:3",
+        //     'lampiran.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+        // ]);
 
 
         $input = $req->input();
@@ -73,6 +73,7 @@ class PengaduanController extends Controller
 
                 }catch (Exception $e) {
                     DB::rollBack();
+                    
                     // $e->getMessage() contains the error message 
                 }
         

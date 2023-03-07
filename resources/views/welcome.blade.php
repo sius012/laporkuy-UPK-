@@ -71,9 +71,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Lampiran</label>
-                                <input type="file" class="form-control-file" name="lampiran[]" multiple required id="lampiran">
+                                <input type="file" class="form-control-file" name="lampiran[]" multiple required id="lampiran" accept="image/*">
                             </div>
-                            <button class="btn btn-primary-lk" type="submit">Buat Pengaduan</button>
+                            <button class="btn btn-primary-lk" type="submit" >Buat Pengaduan</button>
                         </form>
                     </div>
                 </div>

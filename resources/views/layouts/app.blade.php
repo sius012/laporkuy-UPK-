@@ -9,7 +9,8 @@
 
     <!-- More -->
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bootstrap 4 -->
@@ -68,7 +69,8 @@
                     <div class="navbar-search-block">
                         <form class="form-inline">
                             <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                                <input class="form-control form-control-navbar" type="search" placeholder="Search"
+                                    aria-label="Search">
                                 <div class="input-group-append">
                                     <button class="btn btn-navbar" type="submit">
                                         <i class="fas fa-search"></i>
@@ -83,7 +85,7 @@
                 </li>
 
                 <!-- Messages Dropdown Menu -->
-                
+
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
 
@@ -118,12 +120,29 @@
                         <i class="fas fa-th-large"></i>
                     </a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                      <i class="fas fa-user-circle" style="font-size: 20pt"></i>
-                  </a>
-              </li>
+                <li class="nav-link">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex  justify-content-end">
+                        <li class="nav-item">
+                            <div class="dropdown">
+                              
+                                <a href=""  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i></a>
+            
+
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#"><i class="fas fa-user m-2"></i>Pengaturan Akun</a>
+                                    <form action="{{route('logout')}}" method="post">
+                                        @csrf
+                                        <button class="btn btn-danger btn-sm m-2"> <i class="fa fa-exit"></i>
+                                            Keluar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
             </ul>
+
         </nav>
         <!-- /.navbar -->
 
@@ -142,7 +161,8 @@
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         @foreach(Laporkuy::renderNav() as $rs)
@@ -151,7 +171,8 @@
                         @endphp
                         @if(in_array(Auth::user()->roles[0]->name, $visibility))
                         <li class="nav-item">
-                            <a href="{{$rs['url']}}" class="nav-link nav-link-lk @if(url()->current() == $rs['url']) active @endif">
+                            <a href="{{$rs['url']}}"
+                                class="nav-link nav-link-lk @if(url()->current() == $rs['url']) active @endif">
                                 <i class="nav-icon {{$rs['icon']}}"></i>
                                 {{$rs["nama_menu"]}}
                             </a>
@@ -194,7 +215,8 @@
             <div class="float-right d-none d-sm-block">
                 <b>Version</b> 3.2.0
             </div>
-            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights
+            reserved.
         </footer>
 
         <!-- Control Sidebar -->
@@ -246,4 +268,5 @@
     <script src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.3/datatables.min.js"></script>
     @stack("js")
 </body>
+
 </html>

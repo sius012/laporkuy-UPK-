@@ -37,6 +37,7 @@ Route::group(['middleware'=> ["role:Admin"],"prefix"=>"admin"], function(){
 
 
     Route::get('/getsingleuser',[\App\Http\Controllers\Admin\PengaturanAkunController::class, "getSingleUser"])->name("account.getsingleuser");
+    Route::put('/hapuspengguna',[\App\Http\Controllers\Admin\PengaturanAkunController::class, "hapusPengguna"])->name("account.delete");
 });
 
 
@@ -56,7 +57,7 @@ Route::group(['middleware'=>['role:Admin|Petugas']], function(){
     Route::get('getsinglepengaduan', [\App\Http\Controllers\PengaduanController::class,"getSingle"])->name('getsinglepengaduan');
     
     Route::get('riwayattugas', [\App\Http\Controllers\Petugas\PetugasController::class,"riwayattugas"])->name('petugas.riwayattugas');
-    
+    Route::post('/konfirmasiselesai', [\App\Http\Controllers\PenugasanController::class, "konfirmasiselesai"])->name("petugas.konfirmasiselesai");
 });
 
 Route::get('profil', [\App\Http\Controllers\PengaturanProfilController::class, "index"])->name('pengaturan.profile');
