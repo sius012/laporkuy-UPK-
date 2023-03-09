@@ -50,11 +50,11 @@
 
 <section>
     <div class="container">
-        <h3 class="display-6 text-center mb-4">
-            Mari Buat Pengaduan
-        </h3>
         <div class="card" id="card-pengaduan">
             <div class="card-body">
+            <h3 class="display-6 text-center mb-4">
+            Mari Buat Pengaduan
+        </h3>
                 <div class="row">
                     <div class="col-sm-5 col-carousel">
                         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">

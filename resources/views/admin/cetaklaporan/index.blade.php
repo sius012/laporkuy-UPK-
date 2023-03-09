@@ -4,8 +4,9 @@
 <div class="container">
     <div class="container">
         <div class="card">
-            <div class="card-header">Manage Users</div>
+            <div class="card-header">Cetak laporan Pengaduan</div>
             <div class="card-body">
+                @include("components.laporkuy.user.filter")
                 {{ $dataTable->table() }}
             </div>
         </div>

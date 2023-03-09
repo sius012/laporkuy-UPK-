@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" style="border-radius: 20px">
     <div class="card-header">
        <b>{{ucwords($pn->judul_pengaduan)}} : {{$pn->jenis->jenis}}</b>  <span class="badge {{Laporkuy::renderSpan($pn->status)}} p-2 m-1">{{$pn->status}}</span>
     </div>
@@ -17,9 +17,11 @@
             <li class="nav-item">
               <a class="nav-link active" id="keterangan-tab{{$i}}" data-toggle="tab" href="#keterangan{{$i}}" role="tab" aria-controls="keterangan" aria-selected="true">Keterangan</a>
             </li>
+            @if($pn->pelapor->id == Auth::user()->id)
             <li class="nav-item">
               <a class="nav-link" id="respon-tab{{$i}}" data-toggle="tab" href="#respon{{$i}}" role="tab" aria-controls="respon" aria-selected="false">Respon</a>
             </li>
+            @endif
             @if($pn->pelapor->id == Auth::user()->id)
             <li class="nav-item">
               <a class="nav-link" id="petugas-tab{{$i}}" data-toggle="tab" href="#petugas{{$i}}" role="tab" aria-controls="petugas" aria-selected="false">Petugas</a>
@@ -35,7 +37,13 @@
             @endif
           </ul>
           <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="keterangan{{$i}}" role="tabpanel" aria-labelledby="home-tab">{{$pn->keterangan}}</div>
+            <div class="tab-pane fade show active" id="keterangan{{$i}}" role="tabpanel" aria-labelledby="home-tab">{{$pn->keterangan}}
+            <div class="container">
+                <label for="">Lokasi</label>
+                <div class="mapouter"><div class="gmap_canvas"><iframe width="500" height="510" id="gmap_canvas" src="https://maps.google.com/maps?q={{$pn->lokasi}}&t=&z=10&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><br><style>.mapouter{text-align:left;}</style><style>.gmap_canvas {overflow:hidden;background:none!important;height;}</style></div></div>
+            </div>
+            </div>
+            
             <div class="tab-pane fade show" id="respon{{$i}}" role="tabpanel" aria-labelledby="home-tab">
                 @if($pn->penugasan != null)
                     
@@ -78,7 +86,7 @@
                                     @if($pn->penugasan->tanggapan != null)
                                     @foreach($pn->penugasan->tanggapan as $l => $tgp)
                                     <!-- Message. Default to the left -->
-                                    <div class="direct-chat-msg @if(Auth::user()->id != $tgp->sender->id) left @else right @endif">
+                                    <div class="direct-chat-msg @if(Auth::user()->id != $tgp->sender->id) left @else right @endif ">
                                        
                                             
                                         
@@ -88,10 +96,10 @@
                                                 pm</span>
                                         </div>
                                         <!-- /.direct-chat-infos -->
-                                        <img class="direct-chat-img" src="dist/img/user1-128x128.jpg"
+                                        <img class="direct-chat-img" src="{{isset($tgp->sender->pp()->isi) ? $tgp->sender->pp()->isi : ''}}"
                                             alt="message user image">
                                         <!-- /.direct-chat-img -->
-                                        <div class="direct-chat-text">
+                                        <div class="direct-chat-text ">
                                             {{$tgp->tanggapan}}
                                         </div>
                                         <!-- /.direct-chat-text -->

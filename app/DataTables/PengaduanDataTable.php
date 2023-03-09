@@ -20,6 +20,19 @@ class PengaduanDataTable extends DataTable
      * @param QueryBuilder $query Results from query() method.
      * @return \Yajra\DataTables\EloquentDataTable
      */
+    public $judul = "";
+    public $id_jp = "";
+    public $status = "";
+    public $dari = "";
+    public $sampai = "";
+
+    function __construct(){
+        parent::__construct();
+
+  
+
+    }
+
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
@@ -40,8 +53,30 @@ class PengaduanDataTable extends DataTable
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Pengaduan $model): QueryBuilder
-    {
-        return $model->with("jenis")->with('pelapor')->newQuery();
+    {   
+        $pengaduan = $model->with("jenis")->with('pelapor')->newQuery();
+
+
+
+        if(strlen($this->judul) > 0){
+            $pengaduan = $pengaduan->where("judul_pengaduan","LIKE","%".$this->judul."%");
+         }
+ 
+         if(strlen($this->id_jp) > 0){
+             $pengaduan = $pengaduan->where('id_jp', $this->id_jp);
+         }
+ 
+         if(strlen($this->dari) > 0 and strlen($this->sampai)){
+             $pengaduan = $pengaduan->whereBetween("tanggal",[$this->dari." ".Carbon::now()->format('H:i:s'), $this->sampai." ".Carbon::now()->format('H:i:s')]);
+         }
+ 
+         if(strlen($this->status)){
+             $pengaduan = $pengaduan->where("status", $this->status);
+          }
+ 
+
+
+        return $pengaduan->newQuery();
     }
 
     /**
@@ -61,7 +96,7 @@ class PengaduanDataTable extends DataTable
                     ->parameters([
                         'dom'          => 'Bfrtip',
                         'buttons'      => ['export', 'print', 'reset', 'reload'],
-                    ])
+                    ])->searching(false)
                     ->buttons([
                         Button::make('excel'),
                         Button::make('csv'),

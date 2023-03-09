@@ -1,5 +1,5 @@
 @extends("layouts.app")
-@section("title", "Data Laporan")
+@section("title", "Data Pengaduan")
 @section("icon", "fa fa-file")
 @section("content")
 <div class="container-fluid">
@@ -83,6 +83,7 @@
 
 $(document).ready(function() {
     $("#example").DataTable({
+        "searching": false,
         "responsive": true,
         "lengthChange": false,
         "autoWidth": false,

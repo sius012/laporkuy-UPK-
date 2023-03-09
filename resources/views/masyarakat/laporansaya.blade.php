@@ -7,7 +7,7 @@
 
 <div class="container card p-4 container-pengaduan">
     <div class="row">
-        <div class="col"><h3 class='mb-3 font-weight-bold'>Pengaduan Saya</h3></div>
+        <div class="col"><h3 class='mb-3 font-weight-bold' style=" color:#6e21cc "><i class="fa fa-envelope-open"></i>  Pengaduan Saya</h3></div>
         <div class="col"><div class="container d-flex">
             <button class="btn btn-primary-lk font-bold fs-4 ml-auto" data-toggle="modal" data-target="#tambahpengaduan-modal">+</button> </div></div>
     </div>
@@ -52,34 +52,12 @@
 @endsection
 
 @push('js')
+<script src="{{asset('js/laporkuy/pengaduanuser.js')}}"></script>
 <script>
-$(document).ready(function() {
-    $(".btn-lampiran").click(function() {
-        $.ajax({
-            headers: {
-                "X-CSRF-TOKEN": $("meta[name=csrf-token]").attr("content")
-            },
-            data: {
-                id_pengaduan: $(this).val(),
-                state: $(this).attr('state')
-            },
-            url: "{{route('pengaduan.lihatlampiran')}}",
-            type: "get",
-            dataType: "json",
-            success: function(data) {
-                let corousel = data.map(function(e, i) {
-                    return `<div class="carousel-item ${i == 0 ? "active" : ""} ">
-                        <img class="d-block w-100" src="${e['isi_lampiran']}" alt="First slide">
-                      </div>`;
-                });
-                console.log(corousel);
-                $("#img-prev").html(corousel);
-            },
-            error: function(err) {
-                alert(err.responseText);
-            }
-        });
-    })
-});
+    $(document).ready(function(){
+        $(".btn-lampiran").click(function(){
+            showLampiran($(this), "{{route('pengaduan.lihatlampiran')}}");
+        })
+    });
 </script>
 @endpush

@@ -5,7 +5,7 @@
     <div class="card container-pengaduan p-4">
         <div class="row">
             <div class="col">
-                <h3 class='mb-3 font-weight-bold'>Jelajahi Aduan</h3>
+                <h3 class='mb-3 font-weight-bold' style=" color:#6e21cc "> <i class="fa fa-rocket"></i>  Jelajahi Aduan</h3>
             </div>
             <div class="col">
                 <div class="container d-flex">

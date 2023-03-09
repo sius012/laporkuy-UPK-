@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 @section('heading-auth', 'Masuk')
-
+@section('title', 'Masuk')
 @section("content")
 <form action="{{route('login')}}" method="post">
 @csrf

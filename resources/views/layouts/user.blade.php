@@ -28,12 +28,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="{{asset('css/mycss.css')}}" rel="stylesheet">
+    <link rel="shortcut icon" href="{{asset('img/icon-small.png')}}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @if(isset($transparent))
 @if($transparent==false)
     <style>
       h4,h5,h6,h3,h2,h1,{
-          color:#6e21cc;
+          color:#6e21cc !important;
       }
 
     p{
@@ -177,13 +178,13 @@
         <!-- Left links -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active @if(isset($transparent))  @if($transparent == false) nav-link-lk @endif @endif" href="{{route('user.home')}}" aria-current="page" >Beranda</a>
+            <a class="nav-link active @if(isset($transparent))  @if($transparent == false) nav-link-lk @endif @endif" href="{{route('user.home')}}" aria-current="page" >  <i class="fa fa-home mx-2"></i> Beranda</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link @if(isset($transparent))  @if($transparent == false) nav-link-lk @endif @endif" href="{{route('pengaduan.list.user')}}">Laporan Saya</a>
+            <a class="nav-link @if(isset($transparent))  @if($transparent == false) nav-link-lk @endif @endif" href="{{route('pengaduan.list.user')}}"><i class="fa fa-envelope-open mx-2"></i>  Laporan Saya</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link @if(isset($transparent))  @if($transparent == false) nav-link-lk @endif @endif" href="{{route('jelajahiaduan')}}">Jelajahi Laporan</a>
+            <a class="nav-link @if(isset($transparent))  @if($transparent == false) nav-link-lk @endif @endif" href="{{route('jelajahiaduan')}}"><i class="fa fa-rocket mx-2"></i>Jelajahi Laporan</a>
           </li>
           <!-- Navbar dropdown -->
         
@@ -192,7 +193,7 @@
           <li class="nav-item">
             <div class="dropdown">
               @if(Auth::check())
-              <button class="btn btn-white-lk dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button class="btn @if(!isset($transparent)) btn-white-lk @else btn-primary-lk @endif dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{Auth::user()->name}}
               </button>
               @else
@@ -202,7 +203,7 @@
              
             
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#"><i class="fas fa-user m-2"></i>Pengaturan Akun</a>
+                <a class="dropdown-item" href="{{route('pengaturan.profile')}}" <i class="fas fa-user m-2"></i>Pengaturan Akun</a>
                 <form action="{{route('logout')}}" method="post">
                   @csrf
                   <button class="btn btn-danger btn-sm m-2"> <i class="fa fa-exit"></i> Keluar</button>
