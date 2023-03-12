@@ -1,0 +1,264 @@
+
+ 
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+
+  * {
+      font-family: 'Inter', sans-serif;
+  }
+
+ .content-wrapper{
+    background-color: white !important;
+ }
+
+
+  :root {
+    --primary: #110933;
+  }
+ 
+    .my-nav {
+        background-color: var(--primary);
+    }
+
+    .my-nav .nav-item a{
+        color: white;
+        padding: 10px 10pt;
+        font-size: 10pt;
+        font-weight: bold;
+        border-radius: 10px;
+    }
+
+
+    .my-nav .nav-item a:hover{
+        background-color: white;
+        color: var(--primary);
+        transition: .5s;
+    }
+
+
+    .navbar-brand{
+        color:white !important;
+        font-size: 18pt !important;
+    }
+    
+    .actived-lk{
+        background-color: rgba(249, 242, 255, 0.2);
+    }
+.bg-menunggu{
+
+    background-color: rgb(116, 116, 116) !important;
+    color: white !important;
+}
+
+.bg-kepetugas{
+    background-color: rgb(202, 199, 22) !important;
+    color: white !important;
+}
+
+.bg-diproses{
+    background-color: rgb(179, 255, 0) !important;
+    color: white !important;
+}
+
+.bg-ditunda{
+    background-color: rgb(238, 93, 93) !important;
+    color: white !important;
+}
+
+.bg-selesai{
+    background-color: rgb(113, 123, 255) !important;
+    color: white !important;
+}
+
+.sidebar-light-primary{
+    background: rgb(2,0,36);
+
+
+    color: white !important;
+}
+
+.sidebar-light-primary .nav-link{
+
+    font-weight: bold;
+    color: bacwhite !important;
+}
+
+
+.bg-primary-lk{
+    background: linear-gradient(74deg, rgba(2,0,36,1) 0%, rgb(52, 9, 121) 0%, rgb(109, 57, 220) 100%) !important;
+}
+
+aside .nav-link{
+    font-size: 12pt !important;
+}
+
+.btn-primary-lk{
+    background: linear-gradient(74deg, rgba(2,0,36,1) 0%, rgb(58, 9, 121) 0%, rgb(133, 57, 220) 100%);
+    color: white !important;
+    border-radius: 40px !important;
+}
+
+.bg-primary-lk{
+    color: white;
+}
+
+.navbar-lk-trans{
+    
+    background-color: rgba(0, 0, 0, 0.219)
+}
+
+.navbar-lk-trans .nav-item .nav-link{
+    color: white !important;
+}
+.navbar-nav .nav-link-lk{
+
+  background-image: linear-gradient(60deg, #6111e2, #5112d0);
+  font-weight: bold;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+}
+
+
+.colored-brand{
+    color:rgb(52, 9, 121) !important;
+    font-weight: bold;
+}
+
+.text-primary-lk{
+
+    background-image: linear-gradient(60deg, #6111e2, #5112d0) !important;
+    font-weight: bold;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  
+  }
+
+.float-right{
+    
+}
+ .nav-link{
+margin: 10px;   
+}
+
+.tab-pane{
+    min-height: 100px;
+    padding: 20px;
+}
+
+.btn-white-lk{
+    background-color: white;
+    color: #5112d0;
+    border-radius: 50px;
+    font-weight: bold;
+}
+
+
+.card-main-task{
+    border: 3px solid rgb(107, 30, 209) !important;
+}
+
+
+
+aside .nav-item .nav-link-lk{
+    background: #F3F3F3 !important ;
+    border-radius: 15px !important;
+    padding: 15px;
+    font-weight: bold;
+    color: #7F0FD8;
+    font-size: 10pt !important;
+}
+aside .nav-item .active{
+    background: linear-gradient(89.31deg, #7F0FD8 -3.89%, #6E30D4 50.4%, #6246D1 87.59%) !important;
+    
+    padding: 15px;
+}
+
+.brand-lk{
+    border-bottom: 4px solid #5112d0;
+    width: 80%;
+    padding: 10px;
+}
+
+
+.nav-sidebar>.nav-item .nav-icon {
+    margin-left: 0rem!important;
+    font-size: 1.2rem;
+    margin-right: 0rem!important;
+    text-align: center;
+    width: 1.6rem!important;
+}
+
+.sidebar-mini .main-sidebar .nav-link,
+.sidebar-mini-md .main-sidebar .nav-link,
+.sidebar-mini-xs .main-sidebar .nav-link {
+    width: calc(300px - .5rem * 2)!important;
+}
+
+
+
+
+.navbar .nav-item .nav-link{
+    color: #7F0FD8;
+}
+
+.navbar-lk{
+    border-bottom: 4px solid #7F0FD8;
+}
+
+.text-title{
+    color: #7F0FD8;
+    font-weight: bold;
+}
+
+
+.card-header{
+    color: #7F0FD8;
+}
+
+.card-info{
+    padding: 30px;
+    text-align: center;
+    border-radius: 40px;
+    box-shadow: 0px 0px 5px -4px black;
+    margin: 20px;
+}
+
+.card-info i{
+    font-size: 40pt;
+    margin: 30px;
+    color:#5112d0;
+}
+
+
+.card-info{
+    min-height: 300px;
+    border: 3px solid #5112d0;
+}
+
+
+.card-task label{
+    font-size: 10pt;
+}
+
+.card-task p{
+    font-size: 10pt;
+}
+
+
+
+
+#card-pengaduan{
+    border-radius: 30px !important;
+    padding: 10px;
+    box-shadow: 0px 0px 30px -20px black;
+}
+
+#card-pengaduan input, #card-pengaduan textarea{
+    border: 2px solid rebeccapurple;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.dd-notif{
+    min-width: 400px !important
+}
